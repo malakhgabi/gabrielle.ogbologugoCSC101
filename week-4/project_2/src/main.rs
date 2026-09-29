@@ -28,5 +28,5 @@ fn main() {
         }
     } else {
         println!("No incentive was specified for this age.",);
-    }
+    } 
 }
