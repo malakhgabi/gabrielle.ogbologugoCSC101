@@ -1,3 +1,4 @@
+
 fn main() {
     let levels = vec![
         "APS 1-2",
@@ -47,51 +48,63 @@ fn main() {
     println!("APS LEVEL CHECKER");
     println!("-----------------");
 
-    println!("Choose a profession:");
+    println!("Choose your profession:");
     println!("1. Office Admin");
     println!("2. Academic");
     println!("3. Lawyer");
     println!("4. Teacher");
 
-    let mut profession = String::new();
+    println!("Enter Your Choice [1-4]:");
 
-    println!("Enter your choice (1-4):");
+    let mut profession = String::new();
 
     std::io::stdin().read_line(&mut profession).expect("Failed to read input");
 
-    let choice: usize = profession.trim().parse().expect("Please enter a valid number");
+    let choice: usize = profession.trim().parse().expect("Enter a valid number");
 
-    println!("Enter the APS level (1-6):");
+    println!("Enter years of experience:");
 
-    let mut input_level = String::new();
+    let mut experience = String::new();
 
-    std::io::stdin().read_line(&mut input_level).expect("Failed to read input");
+    std::io::stdin().read_line(&mut experience).expect("Failed to read input");
 
-    let level: usize = input_level.trim().parse().expect("Please enter a valid number");
+    let years: u32 = experience.trim().parse().expect("Enter a valid number of years");
 
-    if level < 1 || level > 6 {
-        println!("Invalid APS level.");
-        return;
-    }
-
-    let index = level - 1;
-
-    if choice == 1 {
-        println!("Profession: Office Admin");
-        println!("Position: {}", office_admin[index]);
-    } else if choice == 2 {
-        println!("Profession: Academic");
-        println!("Position: {}", academic[index]);
-    } else if choice == 3 {
-        println!("Profession: Lawyer");
-        println!("Position: {}", lawyer[index]);
-    } else if choice == 4 {
-        println!("Profession: Teacher");
-        println!("Position: {}", teacher[index]);
+    let index = if years <= 2 {
+        0
+    } else if years <= 5 {
+        1
+    } else if years <= 8 {
+        2
+    } else if years <= 10 {
+        3
+    } else if years <= 13 {
+        4
     } else {
+        5
+    };
+
+    if choice < 1 || choice > 4 {
         println!("Invalid profession choice.");
         return;
     }
 
+    if years > 13 {
+        println!("SES is the highest listed category.");
+    }
+
+    let position = if choice == 1 {
+        office_admin[index]
+    } else if choice == 2 {
+        academic[index]
+    } else if choice == 3 {
+        lawyer[index]
+    } else {
+        teacher[index]
+    };
+
+    println!("\n--- RESULT ---");
+    println!("Years of experience: {}", years);
     println!("APS Level: {}", levels[index]);
+    println!("Position: {}", position);
 }
