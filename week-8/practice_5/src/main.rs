@@ -16,7 +16,7 @@ fn main() {
         city.push(new_city);
     }
     print!("Your preferred cities are:\n");
-    let mut count-1;
+    let mut count=1;
     // loop to iterate elements in vector
     for i in city
     {
